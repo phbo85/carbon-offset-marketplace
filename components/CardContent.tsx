@@ -9,13 +9,17 @@ import {
   Tfoot,
   Tr,
   Th,
-  TableCaption,
   TableContainer,
   Td,
+  Text,
+  IconButton,
+  Flex,
+  Icon,
 } from '@chakra-ui/react'
+import { SlClose } from 'react-icons/sl'
 
 const CartContent = () => {
-  const { cart } = useCartStore()
+  const { cart, remove } = useCartStore()
 
   if (cart.length === 0) {
     return <div>Your cart is empty</div>
@@ -53,7 +57,17 @@ const CartContent = () => {
             ({ id, name, supplierName, pricePerTon = 0, quantity }) => (
               <Tr key={id}>
                 <Td>
-                  {name} - {supplierName}
+                  <Flex gap={2}>
+                    <Text>
+                      {name} - {supplierName}
+                    </Text>
+                    <IconButton
+                      size="xs"
+                      aria-label="Remove from cart"
+                      icon={<Icon as={SlClose} boxSize={4} />}
+                      onClick={() => remove(id)}
+                    />
+                  </Flex>
                 </Td>
                 <Td isNumeric>${pricePerTon.toLocaleString('en-US')}</Td>
                 <Td isNumeric>{quantity.toLocaleString('en-US')}</Td>
