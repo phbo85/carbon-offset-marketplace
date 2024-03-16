@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 export const projects = [
   {
     id: 1,
