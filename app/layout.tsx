@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
+import NextLink from 'next/link'
 import { Inter } from 'next/font/google'
 import { Providers } from './providers'
 import CartIcon from '@/components/CartIcon'
@@ -20,10 +21,13 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <body>
-        <Flex as="header" justify="space-between">
-          Carbon Project Marketplace <CartIcon />
-        </Flex>
-        <Providers>{children}</Providers>
+        <Providers>
+          <Flex as="header" justify="space-between">
+            <NextLink href="/">Carbon Project Marketplace</NextLink>{' '}
+            <CartIcon />
+          </Flex>
+          {children}
+        </Providers>
       </body>
     </html>
   )

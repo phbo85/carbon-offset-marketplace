@@ -7,9 +7,11 @@ import {
   InputLeftAddon,
   NumberInput,
   NumberInputField,
-  Text,
+  Icon,
+  Flex,
 } from '@chakra-ui/react'
 import { useCartStore } from '@/lib/cart/store'
+import { BsCartCheck, BsCartPlus } from 'react-icons/bs'
 
 const AddToCart = ({
   id,
@@ -24,16 +26,12 @@ const AddToCart = ({
   const item = cart.find((item) => item.id === id)
   const possibleAmount = item ? max - item.quantity : max
   const [amount, setAmount] = useState(possibleAmount)
+  const total = amount * price
   const handleChange = (_: string, valueAsNumber: number) =>
     setAmount(valueAsNumber)
-  const total = price * amount
-
-  useEffect(() => {
-    setAmount(possibleAmount)
-  }, [possibleAmount])
 
   return (
-    <>
+    <Flex justify="space-between" gap={6} w="full">
       <InputGroup>
         <InputLeftAddon>t</InputLeftAddon>
         <NumberInput
@@ -47,14 +45,20 @@ const AddToCart = ({
           <NumberInputField borderLeftRadius={0} />
         </NumberInput>
       </InputGroup>
-      <Text>${total}</Text>
       <Button
+        leftIcon={
+          possibleAmount === 0 ? (
+            <Icon as={BsCartCheck} />
+          ) : (
+            <Icon as={BsCartPlus} />
+          )
+        }
         onClick={() => addToCart(id, amount)}
         isDisabled={possibleAmount === 0}
       >
-        Add to Cart
+        {possibleAmount === 0 ? 'in cart' : `$${total.toLocaleString('en-US')}`}
       </Button>
-    </>
+    </Flex>
   )
 }
 

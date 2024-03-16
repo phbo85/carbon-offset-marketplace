@@ -56,7 +56,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         </Wrap>
         <Box mt="auto">
           <Text fontSize="xl" fontWeight="bold" textAlign="right">
-            ${pricePerTon.toLocaleString()}
+            ${pricePerTon.toLocaleString('en-US')}
           </Text>
           <Text fontSize="xs" textAlign="right">
             per ton of CO2
