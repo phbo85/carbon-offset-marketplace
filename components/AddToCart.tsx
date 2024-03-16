@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Button,
   InputGroup,
@@ -20,11 +20,17 @@ const AddToCart = ({
   max: number
   price: number
 }) => {
-  const { add: addToCart } = useCartStore()
-  const [amount, setAmount] = useState(max)
+  const { cart, add: addToCart } = useCartStore()
+  const item = cart.find((item) => item.id === id)
+  const possibleAmount = item ? max - item.quantity : max
+  const [amount, setAmount] = useState(possibleAmount)
   const handleChange = (_: string, valueAsNumber: number) =>
     setAmount(valueAsNumber)
   const total = price * amount
+
+  useEffect(() => {
+    setAmount(possibleAmount)
+  }, [possibleAmount])
 
   return (
     <>
@@ -33,8 +39,7 @@ const AddToCart = ({
         <NumberInput
           value={amount}
           onChange={handleChange}
-          defaultValue={max}
-          max={max}
+          max={possibleAmount}
           min={0}
           precision={0}
           w="100%"
@@ -43,7 +48,12 @@ const AddToCart = ({
         </NumberInput>
       </InputGroup>
       <Text>${total}</Text>
-      <Button onClick={() => addToCart(id, amount)}>Add to Cart</Button>
+      <Button
+        onClick={() => addToCart(id, amount)}
+        isDisabled={possibleAmount === 0}
+      >
+        Add to Cart
+      </Button>
     </>
   )
 }
