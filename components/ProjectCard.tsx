@@ -1,55 +1,62 @@
+import { getSDG } from '@/lib/projects/getSDG'
+import { type Project } from '@/lib/projects/schema'
 import {
+  AspectRatio,
+  Box,
   Card,
   CardBody,
   CardFooter,
-  Button,
-  Text,
-  Heading,
-  AspectRatio,
-  Tag,
-  Wrap,
-  Box,
   Flex,
-  NumberInput,
-  NumberInputField,
-  InputGroup,
-  InputLeftAddon,
+  Heading,
+  Tag,
+  Text,
+  Wrap,
 } from '@chakra-ui/react'
 import NextImage from 'next/image'
-import { type Project } from '@/lib/projects/schema'
-import { getSDG } from '@/lib/projects/getSDG'
+import AddToCart from './AddToCart'
 
 const ProjectCard = ({ project }: { project: Project }) => {
+  const {
+    id,
+    name,
+    country,
+    image,
+    supplierName,
+    pricePerTon,
+    offeredVolumeInTons,
+    sdgs,
+  } = project
+
   return (
     <Card>
       <CardBody as={Flex} direction="column" gap={4}>
         <AspectRatio ratio={16 / 9} w="full">
           <NextImage
-            src={project.image}
+            src={image}
             fill
             style={{ objectFit: 'cover' }}
-            alt={project.name}
+            alt={name}
           />
         </AspectRatio>
         <Heading as="h3" size="xl">
-          {project.name}
+          {name}
         </Heading>
         <Flex justify="space-between" my={2}>
           <Tag colorScheme="green" size="lg">
-            supplied by {project.supplierName}
+            supplied by {supplierName}
           </Tag>
           <Tag colorScheme="teal" size="lg">
-            {project.country}
+            {country}
           </Tag>
         </Flex>
         <Wrap>
-          {project.sdgs.map((id) => (
+          {sdgs.map((id) => (
             <Tag key={id}>{getSDG(id)}</Tag>
           ))}
         </Wrap>
         <Box mt="auto">
           <Text fontSize="xl" fontWeight="bold" textAlign="right">
-            ${project.pricePerTon.toLocaleString()}
+            ${pricePerTon.toLocaleString()}
           </Text>
           <Text fontSize="xs" textAlign="right">
             per ton of CO2
@@ -57,19 +64,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         </Box>
       </CardBody>
       <CardFooter borderTop="1px solid">
-        <InputGroup>
-          <InputLeftAddon>t</InputLeftAddon>
-          <NumberInput
-            defaultValue={project.offeredVolumeInTons}
-            max={project.offeredVolumeInTons}
-            min={0}
-            precision={0}
-            w="100%"
-          >
-            <NumberInputField borderLeftRadius={0} />
-          </NumberInput>
-        </InputGroup>
-        <Button>Add to Cart</Button>
+        <AddToCart id={id} max={offeredVolumeInTons} price={pricePerTon} />
       </CardFooter>
     </Card>
   )
