@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react'
 import {
   Button,
   InputGroup,
-  InputLeftAddon,
   NumberInput,
   NumberInputField,
   Icon,
   Flex,
+  InputRightElement,
 } from '@chakra-ui/react'
 import { useCartStore } from '@/lib/cart/store'
 import { BsCartCheck, BsCartPlus } from 'react-icons/bs'
@@ -37,16 +37,16 @@ const AddToCart = ({
   return (
     <Flex justify="space-between" gap={6} w="full">
       <InputGroup>
-        <InputLeftAddon>t</InputLeftAddon>
         <NumberInput
           value={amount}
           onChange={handleChange}
           max={possibleAmount}
           min={0}
           precision={0}
-          w="100%"
+          isDisabled={possibleAmount === 0}
         >
-          <NumberInputField borderLeftRadius={0} />
+          <NumberInputField />
+          <InputRightElement>t</InputRightElement>
         </NumberInput>
       </InputGroup>
       <Button

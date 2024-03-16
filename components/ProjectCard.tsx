@@ -35,6 +35,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
             src={image}
             fill
             style={{ objectFit: 'cover' }}
+            sizes="(max-width: var(--chakra-breakpoints-sm)) 100vw, (max-width: var(--chakra-breakpoints-lg))) 33vw, 15vw"
             alt={name}
           />
         </AspectRatio>
@@ -42,10 +43,10 @@ const ProjectCard = ({ project }: { project: Project }) => {
           {name}
         </Heading>
         <Flex justify="space-between" my={2}>
-          <Tag colorScheme="green" size="lg">
+          <Tag bg="custom.green" size="lg">
             supplied by {supplierName}
           </Tag>
-          <Tag colorScheme="teal" size="lg">
+          <Tag bg="custom.bg" size="lg">
             {country}
           </Tag>
         </Flex>

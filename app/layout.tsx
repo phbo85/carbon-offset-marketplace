@@ -1,12 +1,16 @@
 import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import NextLink from 'next/link'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
+
 import { Providers } from './providers'
 import CartIcon from '@/components/CartIcon'
 import { Flex } from '@chakra-ui/react'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +23,7 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.className}>
+    <html lang="en" className={font.className}>
       <body>
         <Providers>
           <Flex as="header" justify="space-between">
