@@ -28,7 +28,7 @@ const AddToCart = ({
   const [amount, setAmount] = useState(possibleAmount)
   const total = amount * price
   const handleChange = (_: string, valueAsNumber: number) =>
-    setAmount(valueAsNumber)
+    setAmount(valueAsNumber || 0)
 
   useEffect(() => {
     setAmount(possibleAmount)
