@@ -6,7 +6,11 @@ const ProjectsList = () => {
   const projects = getProjects()
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2, lg: 3, '2xl': 4 }} spacing={10}>
+    <SimpleGrid
+      columns={{ base: 1, md: 2, lg: 3, '2xl': 4 }}
+      spacing={10}
+      m={10}
+    >
       {projects.map((project) => (
         <ProjectCard project={project} key={project.id} />
       ))}

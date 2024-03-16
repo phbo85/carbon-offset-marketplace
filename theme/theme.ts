@@ -4,7 +4,8 @@ import { cardTheme } from './components/card'
 import { numberInputTheme } from './components/numberInput'
 import { tagTheme } from './components/tag'
 import { buttonTheme } from './components/button'
-
+import { headingTheme } from './components/heading'
+import { tableTheme } from './components/table'
 const theme = extendTheme({
   colors: {
     custom: {
@@ -30,6 +31,8 @@ const theme = extendTheme({
     Card: cardTheme,
     Tag: tagTheme,
     Button: buttonTheme,
+    Heading: headingTheme,
+    Table: tableTheme,
   },
 })
 

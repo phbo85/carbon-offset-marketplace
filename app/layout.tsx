@@ -5,7 +5,7 @@ import { Space_Grotesk } from 'next/font/google'
 
 import { Providers } from './providers'
 import CartIcon from '@/components/CartIcon'
-import { Flex } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
 
 const font = Space_Grotesk({
   subsets: ['latin'],
@@ -26,8 +26,18 @@ export default function RootLayout({
     <html lang="en" className={font.className}>
       <body>
         <Providers>
-          <Flex as="header" justify="space-between">
-            <NextLink href="/">Carbon Project Marketplace</NextLink>{' '}
+          <Flex
+            as="header"
+            justify="space-between"
+            align="center"
+            p={4}
+            bg="white"
+            borderBottom="2px solid black"
+            h={20}
+          >
+            <NextLink href="/">
+              <Heading as="h1">Carbon Project Marketplace</Heading>
+            </NextLink>
             <CartIcon />
           </Flex>
           {children}

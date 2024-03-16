@@ -43,7 +43,7 @@ const CartContent = () => {
 
   return (
     <TableContainer>
-      <Table variant="simple">
+      <Table>
         <Thead>
           <Tr>
             <Th>Project</Th>
