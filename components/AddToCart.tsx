@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Button,
   InputGroup,
@@ -29,6 +29,10 @@ const AddToCart = ({
   const total = amount * price
   const handleChange = (_: string, valueAsNumber: number) =>
     setAmount(valueAsNumber)
+
+  useEffect(() => {
+    setAmount(possibleAmount)
+  }, [possibleAmount])
 
   return (
     <Flex justify="space-between" gap={6} w="full">
